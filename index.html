@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Wish for Zayan</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            width: 400px;
+        }
+        #wishButton {
+            font-size: 1.2em;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        #wishButton:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        #message {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-top: 20px;
+            display: none;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f2d74e;
+            position: absolute;
+            top: -10px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="wishButton">For Zayan</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const button = document.getElementById('wishButton');
+        const message = document.getElementById('message');
+        let celebrationInterval;
+
+        button.addEventListener('click', () => {
+            showMessage();
+            startCelebration();
+            button.style.display = 'none';
+        });
+
+        function showMessage() {
+            message.style.display = 'block';
+            message.innerHTML = "<h2>Happy Birthday, Zayan! 🎉</h2>" +
+                                "<p>Meray sab se achay dost, meri saathi aur wo jo hamesha mera saath deta hai. " + "Tumhara din khushi, hasrat aur yaadgar lamhon se bhara ho. " + "Chalo, ek aur saal ke liye shandar adventures ki taraf!</p>" + "<p><strong>Best Wishes from  Mustafa!</strong></p>";
+        }
+
+        function startCelebration() {
+            createConfetti();
+            celebrationInterval = setInterval(createConfetti, 2000);
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.backgroundColor = randomColor();
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+
+                animateConfetti(confetti);
+            }
+        }
+
+        function animateConfetti(confetti) {
+            const animation = confetti.animate([
+                { transform: 'translate3d(0,0,0)', opacity: 1 },
+                { transform: `translate3d(${Math.random() * 300 - 150}px, ${window.innerHeight}px, 0)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 3000,
+                easing: 'cubic-bezier(0,0,0.2,1)'
+            });
+
+            animation.onfinish = () => confetti.remove();
+        }
+
+        function randomColor() {
+            return `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }
+    </script>
+</body>
+</html>
